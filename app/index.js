@@ -149,3 +149,24 @@ console.log( multiply(5, 5));
 
 
 // ***************** CLASSES *******************
+import animal from './animal';
+
+const firstAnimal = new animal('Simba', 4.5);
+
+
+console.log(firstAnimal);
+firstAnimal.hello();
+//inheriting classes;
+class animalTwo extends animal{
+    constructor(name, height , color){
+        super(name, height);
+        this.color = color;
+    }
+    hello(){
+        console.log(`Hello I'm ${this.name} from Pride Rock`);
+    }
+}
+
+const secondAnimal = new animalTwo('Mufasa', 2, 'red');
+console.log(secondAnimal);
+secondAnimal.hello();
