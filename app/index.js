@@ -86,7 +86,7 @@ let nameS, parents;
 } = son)
 console.log(nameS, parents);
 // ************************METHODS AND MODULES************************
-const cheer = function() {
+const cheer = function () {
   console.log('Whoop!');
 }
 
@@ -216,7 +216,7 @@ Wizard.prototype.pet_name;
 harry.pet_name = 'Wedwing';
 console.log(harry);
 // Wizard protorype info for the pet information
-Wizard.prototype.info = function() {
+Wizard.prototype.info = function () {
   return `I have ${this.pet} named ${this.pet_name}`;
 };
 console.log(harry.info());
@@ -243,50 +243,87 @@ let set = new Set();
 set.add(5);
 set.add(43);
 set.add('wooho');
-set.add({x:50,y:200});
+set.add({
+  x: 50,
+  y: 200
+});
 console.log(set);
 console.log(set.size);
 console.log(set.has(43));
-let numeros = [1, 4, 13 , 16, 10, 20];
-let numberSet =  new Set(numeros);
+let numeros = [1, 4, 13, 16, 10, 20];
+let numberSet = new Set(numeros);
 console.log(numberSet);
-for (let ele of numberSet.values() ){
+for (let ele of numberSet.values()) {
   console.log(ele);
 }
 const contain = (word, letter) => {
   let letters = word.split(""),
-      letterSet = new Set(letters);
+    letterSet = new Set(letters);
   return letterSet.has(letter);
 }
-const trueCheck = contain('west','e');
-const falseCheck = contain('north','e');
+const trueCheck = contain('west', 'e');
+const falseCheck = contain('north', 'e');
 console.log(trueCheck);
 console.log(falseCheck);
 // Re-implemented String.includes()
 // ======= MAPS ============
-import {ab, valMap, stringLettters} from './maps';
+import {
+  ab,
+  valMap,
+  stringLettters
+} from './maps';
 console.log(ab);
 console.log(valMap);
 // loop map
-for (let [key, value] of valMap.entries()){
-    console.log(`${key} point to ${value}`);
+for (let [key, value] of valMap.entries()) {
+  console.log(`${key} point to ${value}`);
 }
 console.log(stringLettters);
 // ======= Exercise ========
 const string = 'werlksdfjaaaxxxxumsdfsdfksfjklsdfkljslkfs';
-const countLetter = (word,origin_letter) => {
+const countLetter = (word, origin_letter) => {
   let letters = new Map();
   for (let i = 0; i < word.length; i++) {
     let letter = word[i];
     if (!letters.has(letter)) {
       letters.set(letter, 1);
-    }else{
-      letters.set(letter,letters.get(letter) + 1);
+    } else {
+      letters.set(letter, letters.get(letter) + 1);
     }
   }
   return letters.get(origin_letter);
 }
-let a_account = countLetter(string,'a');
-let x_account = countLetter(string,'x');
-console.log( countLetter(string,'a'));
+let a_account = countLetter(string, 'a');
+let x_account = countLetter(string, 'x');
+console.log(countLetter(string, 'a'));
 console.log(x_account);
+
+// ====== closures ========
+const call = () => {
+  const secret = 'ES6 Rock ';
+  const reveal = () => {
+    console.log(secret);
+  };
+  return reveal;
+}
+// console.log(secret);// cant access to secret variable in  the global scope ;
+// call();//can access the secret variable from the variable scope  ;
+const revealOut = call();
+revealOut();// lexical scoping.
+// ===== function factory ==============
+const addSuffix = (x) => {
+  const concat = (y) => y+x;
+  return concat;
+}
+const addTwo = addSuffix(4);
+console.log(addTwo(2));
+const ness = addSuffix('ness');
+const h = ness('Happy');
+console.log(h);
+const product = x => y => x * y ;
+const mult5 = product(5);
+console.log(mult5(3));
+const mult2 = product(2);
+console.log(mult2(10));
+ 
+
